@@ -5,13 +5,55 @@
  */
 package password311;
 
+import java.util.Scanner;
+
 /**
  *
  * @author srg5328
  */
 public class Account {
     //LoginIn()
-    //LogOut()
+    
+ 
+    Scanner userInput = new Scanner(System.in); 
+    
+    
+     String username = userInput.nextLine(); 
+    String password = userInput.nextLine();
+    
+    
+   public void LoginIn(){
+       System.out.println("Please enter your username");
+        String username = userInput.nextLine(); 
+        
+        System.out.println("Please enter your password");
+        String password = userInput.nextLine(); 
+        
+        
+        if (username.equals(username) && password.equals(password)){
+            System.out.println("Login successful!");
+            
+            
+        }
+        
+        else {
+            System.out.println("Please try again");
+        }
+          
+   }
+   public void LogOut(){
+       System.out.println("Do you want to log out?");
+       Scanner userlogOut = new Scanner (System.in); 
+      
+       
+      
+       
+   }
+    
+    
+    
+   
+    
     
     
 }
