@@ -13,8 +13,6 @@ public class Database{
 
   private String userList[] = new String[5];
   private String passList[] = new String[5];
-
-  private void hardcodeUserList(){
   
   //hardcoded users
   userList[0] = "johndoe1";
@@ -22,9 +20,6 @@ public class Database{
   userList[2] = "guy123";
   userList[3] = "guy456";
   userList[4] = "user1";
-  }
-  
-  private void hardcodePassList(){
     
   //hardcoded passwords, where user [0] == pass [0]
   passList[0] = "Newpassword";
@@ -32,7 +27,6 @@ public class Database{
   passList[2] = "Strongpassword";
   passList[3] = "Mybirthday123";
   passList[4] = "Dogcatcowmouse";
-  }
   
   private int verifyUser(String user, String pass)
   {
