@@ -12,15 +12,18 @@ import java.util.Scanner;
  * @author srg5328
  */
 public class Account {
-    //LoginIn()
     
+     Scanner userInput = new Scanner(System.in); 
+    
+    
+    private String credential; 
+    private final String Account;
+    
+    public Account(String credential){
+        this.Account = credential; 
+    }
  
-    Scanner userInput = new Scanner(System.in); 
-    
-    
-     String username = userInput.nextLine(); 
-    String password = userInput.nextLine();
-    
+  
     
    public void LoginIn(){
        System.out.println("Please enter your username");

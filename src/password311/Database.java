@@ -15,11 +15,11 @@ public class Database{
   private String passList[] = new String[5];
   
   //hardcoded users
-  userList[0] = "johndoe1";
-  userList[1] = "johndoe2";
-  userList[2] = "guy123";
-  userList[3] = "guy456";
-  userList[4] = "user1";
+  userAccount[0] = "johndoe1";
+  userAccount[1] = "johndoe2";
+  userAccount[2] = "guy123";
+  userAccount[3] = "guy456";
+  userAccount[4] = "user1";
     
   //hardcoded passwords, where user [0] == pass [0]
   passList[0] = "Newpassword";
