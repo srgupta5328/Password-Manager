@@ -11,15 +11,15 @@ package password311;
  */
 public class Database{
 
-  private String userList[] = new String[5];
-  private String passList[] = new String[5];
+  private final String userList[] = new String[5];
+  private final String passList[] = new String[5];
   
   //hardcoded users
-  userAccount[0] = "johndoe1";
-  userAccount[1] = "johndoe2";
-  userAccount[2] = "guy123";
-  userAccount[3] = "guy456";
-  userAccount[4] = "user1";
+  userList[0] = "johndoe1";
+  userList[1] = "johndoe2";
+  userList[2] = "guy123";
+  userList[3] = "guy456";
+  userList[4] = "user1";
     
   //hardcoded passwords, where user [0] == pass [0]
   passList[0] = "Newpassword";
@@ -28,12 +28,12 @@ public class Database{
   passList[3] = "Mybirthday123";
   passList[4] = "Dogcatcowmouse";
   
-  private int verifyUser(String user, String pass)
+  private int verifyUser(String user, String password)
   {
     //where 0 = verified and 1 = fail
-     if (user == "johndoe1")
+     if (user.equals("johndoe1"))
      {
-        if (password ==  "Newpassword")
+        if (password.equals("Newpassword"))
         {
           return 0;
         }
@@ -42,9 +42,9 @@ public class Database{
           return 1;
         }
      }
-     if (user == "johndoe2")
+     if (user.equals("johndoe2"))
      {
-        if (password ==  "Weakpassword")
+        if (password.equals("Weakpassword"))
         {
           return 0;
         }
@@ -53,9 +53,9 @@ public class Database{
           return 1;
         }
      }
-     if (user == "guy123")
+     if (user.equals("guy123"))
      {
-        if (password ==  "Strongpassword")
+        if (password.equals("Strongpassword"))
         {
           return 0;
         }
@@ -64,9 +64,9 @@ public class Database{
           return 1;
         }
      }
-     if (user == "guy456")
+     if (user.equals("guy456"))
      {
-        if (password ==  "Mybirthday123")
+        if (password.equals("Mybirthday123"))
         {
           return 0;
         }
@@ -75,9 +75,9 @@ public class Database{
           return 1;
         }
      }  
-     if (user == "user1")
+     if (user.equals("user1"))
      {
-        if (password ==  "Dogcatcowmouse")
+        if (password.equals("Dogcatcowmouse"))
         {
           return 0;
         }
@@ -88,5 +88,7 @@ public class Database{
      }
     
   }
+
+  
 
 }

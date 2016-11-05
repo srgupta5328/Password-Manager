@@ -15,4 +15,15 @@ public class AccountVerifier {
 +username: string
 +password: string
 */ 
+    
+public void VerifyAccount(String username, String password) {
+
+   
+}
+
+public void connectToDatabase(String username, String password){
+    
+    
+    
+}
 }
