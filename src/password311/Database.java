@@ -14,20 +14,10 @@ public class Database{
   private final String userList[] = new String[5];
   private final String passList[] = new String[5];
   
-  //hardcoded users
-  userList[0] = "johndoe1";
-  userList[1] = "johndoe2";
-  userList[2] = "guy123";
-  userList[3] = "guy456";
-  userList[4] = "user1";
-    
-  //hardcoded passwords, where user [0] == pass [0]
-  passList[0] = "Newpassword";
-  passlist[1] = "Weakpassword";
-  passList[2] = "Strongpassword";
-  passList[3] = "Mybirthday123";
-  passList[4] = "Dogcatcowmouse";
   
+  // Needs to be able to read a txt file and confirm values. 
+  
+
   private int verifyUser(String user, String password)
   {
     //where 0 = verified and 1 = fail
@@ -86,8 +76,8 @@ public class Database{
           return 1;
         }
      }
-    
-  }
+    return 1; 
+  }  
 
   
 

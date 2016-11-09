@@ -22,6 +22,12 @@ public class Account {
     public Account(String credential){
         this.Account = credential; 
     }
+
+    Account() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+ 
  
   
     

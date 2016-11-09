@@ -5,6 +5,8 @@
  */
 package password311;
 
+import java.util.Scanner;
+
 /**
  *
  * @author rohangupta
@@ -166,6 +168,7 @@ public class LoginScreen extends javax.swing.JFrame {
             }
         });
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField JTxtUsername;
@@ -176,4 +179,40 @@ public class LoginScreen extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
+
+    
+    // tie the username in database to the login file
+    // Login methods need to go here
+    
+    Scanner userInput = new Scanner(System.in);  
+     public void LoginIn(){
+       System.out.println("Please enter your username");
+        String username = userInput.nextLine(); 
+        
+        System.out.println("Please enter your password");
+        String password = userInput.nextLine(); 
+        
+        
+        if (username.equals(username) && password.equals(password)){
+            System.out.println("Login successful!");
+            
+            
+        }
+        
+        else {
+            System.out.println("Please try again");
+        }
+          
+   }
+   public void LogOut(){
+       System.out.println("Do you want to log out?");
+       Scanner userlogOut = new Scanner (System.in); 
+      
+       
+      
+       
+   }
+    
 }
+
+
