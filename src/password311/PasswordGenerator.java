@@ -6,12 +6,16 @@ different types of passwords (types: PIN, String, String Options
 
 import java.util.Random;
 
-public class PasswordGenerator {
+public abstract class PasswordGenerator {
     public String result;
     public String password;   
     public String pLength;
     
-    public String startPwordGenerator(){
+    abstract int PINGenerator(){
+        
+    }
+    
+    abstract String startPwordGenerator(){
         result = setGenerationAlgorithm(pLength);
         System.out.println(result);
         return result;
