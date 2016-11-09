@@ -1,4 +1,4 @@
-package password311
+package password311;
 
 /* need to make an abstract class, so that we can have the user be able to select 
 different types of passwords (types: PIN, String, String Options
