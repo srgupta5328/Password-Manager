@@ -20,21 +20,21 @@ public class Credential {
         label = aLabel;
     }
     
-    void setCredentials(String user, String pass, String aLabel){
+    public void setCredentials(String user, String pass, String aLabel){
         this.username = user;
         this.password = pass;
         this.label = aLabel;
     }
     
-    void setUsername(String user){
+    public void setUsername(String user){
         this.username = user;
     }
     
-    void setPassword(String pass){
+    public void setPassword(String pass){
         this.password = pass;
     }
     
-    void setLabel(String aLabel){
+    public void setLabel(String aLabel){
         this.label = aLabel;
     }
     
@@ -55,5 +55,12 @@ public class Credential {
     public String getLabel(){
         return this.label;
     }
+    
+    @Override
+   public String toString() {
+        return this.label + " " + this.username + " " + this.password;
+    }
 
 }
+
+

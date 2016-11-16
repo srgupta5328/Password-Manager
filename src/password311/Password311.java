@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package password311;
-
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -18,7 +21,24 @@ public class Password311 {
     public static void main(String[] args) {
         // TODO code application logic here
        
+        SwingUtilities.invokeLater(new Runnable() {
+           @Override
+           public void run() {
+               try {
+                   UserList list = new UserList();
+                   list.importUsers();
+               } catch (IOException ex) {
+                   Logger.getLogger(IST311PWManager.class.getName()).log(Level.SEVERE, null, ex);
+               }
+               StartScreen ss = new StartScreen();
+               ss.setVisible(true);
+               
+           }
+       });
         
+    }
+    
+}
         
         
     
