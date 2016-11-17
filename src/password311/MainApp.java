@@ -8,7 +8,9 @@ public class MainApp {
     public static void main(String[] args) {
         final JFrame frame = new JFrame("Password Management Login");
         final JButton btnLogin = new JButton("Click to login to your account");
+        final JFrame regframe = new JFrame("Register an account"); 
         final JButton btnRegister = new JButton("Register an account");
+        
         btnLogin.addActionListener(
                 new ActionListener(){
                     public void actionPerformed(ActionEvent e) {
@@ -22,7 +24,7 @@ public class MainApp {
         btnRegister.addActionListener(
             new ActionListener(){
                 public void actionPerformed(ActionEvent e){
-                    RegisterDialog registerDlg = new RegisterDialog(frame);
+                    RegisterDialog registerDlg = new RegisterDialog(regframe);
                     registerDlg.setVisible(true);
                    
                 }
@@ -31,9 +33,10 @@ public class MainApp {
     
  
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(300, 100);
+        frame.setSize(400, 200);
         frame.setLayout(new FlowLayout());
         frame.getContentPane().add(btnLogin);
+        frame.getContentPane().add(btnRegister);
         frame.setVisible(true);
     }
 }

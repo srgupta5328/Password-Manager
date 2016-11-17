@@ -44,53 +44,65 @@ public class RegisterDialog extends JDialog {
         GridBagConstraints cs = new GridBagConstraints();
  
         cs.fill = GridBagConstraints.HORIZONTAL;
- 
-        lbUsername = new JLabel("Username: ");
+        lbname = new JLabel("Name: ");
         cs.gridx = 0;
         cs.gridy = 0;
+        cs.gridwidth = 1;
+        panel.add(lbname, cs);
+        
+        name = new JTextField(20); 
+        cs.gridx = 1;
+        cs.gridy = 0;
+        cs.gridwidth = 1;
+        panel.add(name, cs);
+        
+        lbUsername = new JLabel("Username: ");
+        cs.gridx = 0;
+        cs.gridy = 1;
         cs.gridwidth = 1;
         panel.add(lbUsername, cs);
  
         tfUsername = new JTextField(20);
         cs.gridx = 1;
-        cs.gridy = 0;
+        cs.gridy = 1;
         cs.gridwidth = 2;
         panel.add(tfUsername, cs);
  
         lbPassword = new JLabel("Password: ");
         cs.gridx = 0;
-        cs.gridy = 1;
+        cs.gridy = 2;
         cs.gridwidth = 1;
         panel.add(lbPassword, cs);
  
-        pfPassword = new JPasswordField(20);
+        tfPassword = new JPasswordField(20);
         cs.gridx = 1;
-        cs.gridy = 1;
+        cs.gridy = 2;
         cs.gridwidth = 2;
-        panel.add(pfPassword, cs);
+        panel.add(tfPassword, cs);
         panel.setBorder(new LineBorder(Color.GRAY));
  
-        btnLogin = new JButton("Login");
+        btnRegister = new JButton("Register");
  
-        btnLogin.addActionListener(new ActionListener() {
+        btnRegister.addActionListener(new ActionListener() {
  
             public void actionPerformed(ActionEvent e) {
                 if (Login.authenticate(getUsername(), getPassword())) {
-                    JOptionPane.showMessageDialog(LoginDialog.this,
+                    JOptionPane.showMessageDialog(RegisterDialog.this,
                             "Hi " + getUsername() + "! You have successfully logged in.",
                             "Login",
                             JOptionPane.INFORMATION_MESSAGE);
                     succeeded = true;
                     dispose();
                 } else {
-                    JOptionPane.showMessageDialog(LoginDialog.this,
+                    JOptionPane.showMessageDialog(RegisterDialog.this,
                             "Invalid username or password",
                             "Login",
                             JOptionPane.ERROR_MESSAGE);
                     
-                    
+                    name.setText("");
                     tfUsername.setText("");
-                    pfPassword.setText("");
+                    tfPassword.setText("");
+                    
                     succeeded = false;
  
                 }
@@ -122,7 +134,7 @@ public class RegisterDialog extends JDialog {
     
                 
         JPanel bp = new JPanel();
-        bp.add(btnLogin);
+        
         bp.add(btnCancel);
         bp.add(btnRegister);
  
@@ -135,13 +147,15 @@ public class RegisterDialog extends JDialog {
     }
     
     
- 
+ public String getName() {
+     return name.getText().trim(); 
+ }
     public String getUsername() {
         return tfUsername.getText().trim();
     }
  
     public String getPassword() {
-        return new String(pfPassword.getPassword());
+        return new String(tfPassword.getPassword());
     }
  
     public boolean isSucceeded() {
