@@ -10,6 +10,8 @@ public class MainApp {
         final JButton btnLogin = new JButton("Click to login to your account");
         final JFrame regframe = new JFrame("Register an account"); 
         final JButton btnRegister = new JButton("Register an account");
+        final JFrame addCredFrame = new JFrame("Add a Credential"); 
+        final JButton btnAdd = new JButton("Add"); 
         
         btnLogin.addActionListener(
                 new ActionListener(){
@@ -29,7 +31,14 @@ public class MainApp {
                    
                 }
             });
-        
+        btnAdd.addActionListener(
+            new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    AddCredentialDialog addDlg = new AddCredentialDialog(addCredFrame);
+                    addDlg.setVisible(true);
+                   
+                }
+            });
     
  
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -37,6 +46,7 @@ public class MainApp {
         frame.setLayout(new FlowLayout());
         frame.getContentPane().add(btnLogin);
         frame.getContentPane().add(btnRegister);
+        frame.getContentPane().add(btnAdd);
         frame.setVisible(true);
     }
 }
