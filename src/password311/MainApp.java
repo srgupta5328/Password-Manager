@@ -20,6 +20,7 @@ public class MainApp {
                         loginDlg.setVisible(true);
                         if(loginDlg.isSucceeded()){
                             btnLogin.setText("Hi " + loginDlg.getUsername() + "!");
+                            btnRegister.setVisible(false);
                         }
                     }
                 });
