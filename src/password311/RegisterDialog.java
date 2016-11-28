@@ -86,7 +86,7 @@ public class RegisterDialog extends JDialog {
         btnRegister.addActionListener(new ActionListener() {
  
             public void actionPerformed(ActionEvent e) {
-                if (Login.authenticate(getUsername(), getPassword())) {
+                if (LoginController.authenticate(getUsername(), getPassword())) {
                     JOptionPane.showMessageDialog(RegisterDialog.this,
                             "Hi " + getUsername() + "! You have successfully logged in.",
                             "Login",
