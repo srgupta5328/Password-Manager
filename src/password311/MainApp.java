@@ -12,6 +12,7 @@ public class MainApp {
         final JButton btnRegister = new JButton("Register an account");
         final JFrame addCredFrame = new JFrame("Add a Credential"); 
         final JButton btnAdd = new JButton("Add"); 
+        final JButton btnGenerate = new JButton("Generate"); 
          btnAdd.setVisible(false);
         
         
@@ -42,8 +43,16 @@ public class MainApp {
                     addDlg.setVisible(true);
                    
                 }
+          
             });
-    
+        btnGenerate.addActionListener(
+        new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                AddCredentialDialog generatedlg = new AddCredentialDialog(addCredFrame);
+                    generatedlg.setVisible(true);
+                
+            }
+        });
  
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 200);
