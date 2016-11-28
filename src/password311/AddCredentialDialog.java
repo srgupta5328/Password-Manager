@@ -100,7 +100,11 @@ public class AddCredentialDialog extends javax.swing.JDialog {
                 new ActionListener(){
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        JOptionPane.showMessageDialog(new javax.swing.JFrame(),Password.makePassword(12));
+                   //JOptionPane.showInputDialog(Password.makePassword(12)); 
+                   JOptionPane.showInputDialog(tfPassword, Password.makePassword(12));
+                   // user Copies the password provided and inputs it into the dialog box
+                   // copy whats inside the dialog box into the main password text field
+                   
                     }
                 });
             }
