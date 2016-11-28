@@ -19,6 +19,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
+import java.lang.String; 
+
 
 /**
  *
@@ -39,9 +41,10 @@ public class AddCredentialDialog extends javax.swing.JDialog {
     private JPasswordField tfPassword;
     private JLabel lbLabel; 
     private JLabel lbUsername;
-    private JLabel lbPassword;
+    private JLabel lbPassword; 
     private JButton btnCancel;
     private JButton btnAdd; 
+    private JButton btnGenerate;
     private boolean succeeded;
     
     public AddCredentialDialog(Frame parent){
@@ -88,6 +91,21 @@ public class AddCredentialDialog extends javax.swing.JDialog {
         panel.add(tfPassword, cs);
         panel.setBorder(new LineBorder(Color.GRAY));
         
+ 
+       btnGenerate = new JButton("Generate");
+        btnGenerate.addActionListener(new ActionListener(){
+        
+        public void actionPerformed(ActionEvent e){
+             btnGenerate.addActionListener(
+                new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        JOptionPane.showMessageDialog(new javax.swing.JFrame(),Password.makePassword(12));
+                    }
+                });
+            }
+        }); 
+        
         btnCancel = new JButton("Cancel");
         btnCancel.addActionListener(new ActionListener() {
  
@@ -114,6 +132,7 @@ public class AddCredentialDialog extends javax.swing.JDialog {
         
         addCredentialScreen.add(btnCancel);
         addCredentialScreen.add(btnAdd);
+        addCredentialScreen.add(btnGenerate); 
  
         getContentPane().add(panel, BorderLayout.CENTER);
         getContentPane().add(addCredentialScreen, BorderLayout.PAGE_END);
