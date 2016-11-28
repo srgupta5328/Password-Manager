@@ -12,6 +12,8 @@ public class MainApp {
         final JButton btnRegister = new JButton("Register an account");
         final JFrame addCredFrame = new JFrame("Add a Credential"); 
         final JButton btnAdd = new JButton("Add"); 
+         btnAdd.setVisible(false);
+        
         
         btnLogin.addActionListener(
                 new ActionListener(){
@@ -21,6 +23,7 @@ public class MainApp {
                         if(loginDlg.isSucceeded()){
                             btnLogin.setText("Hi " + loginDlg.getUsername() + "!");
                             btnRegister.setVisible(false);
+                         btnAdd.setVisible(true);
                         }
                     }
                 });
