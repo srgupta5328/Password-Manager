@@ -126,6 +126,7 @@ public class AddCredentialDialog extends javax.swing.JDialog {
                 new ActionListener(){
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        Credentials.getInstance().addCredential(getUsername(), getPassword(), getLabel());
                         JOptionPane.showMessageDialog(new javax.swing.JFrame(),"You've clicked Add new credential button");
                     }
                 });
