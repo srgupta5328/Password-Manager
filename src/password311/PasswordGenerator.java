@@ -9,7 +9,7 @@ package password311;
  *
  * @author rohangupta
  */
-public class Password {
+public class PasswordGenerator {
     public static String generate (String result){
      result = makePassword(12);  
     return result;

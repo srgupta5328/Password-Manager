@@ -10,11 +10,21 @@ package password311;
  * @author rohangupta
  */
 public class LoginController {
-    public static boolean authenticate(String username, String password){
+     
+   public static boolean authenticate(String username, String password){
+       
         if (username.equals("Rohan") && password.equals("Hello")) {
             return true;
         }   
-         else return false;
+        
+        else if (username.equals("Max") && password.equals("Hello")){
+            return true; 
+        }
+       
+        
+        return false;
     }
+     
+
     
 }
