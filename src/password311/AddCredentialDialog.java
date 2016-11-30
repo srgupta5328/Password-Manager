@@ -349,4 +349,5 @@ public class AddCredentialDialog extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField3;
     // End of variables declaration                   
 }
-}
+
+

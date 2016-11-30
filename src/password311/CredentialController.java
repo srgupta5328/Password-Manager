@@ -12,6 +12,20 @@ package password311;
  */
 public class CredentialController {
  
+    public void addCredentialtoFile(){
+        
+    }
     
+    public void editCredentialtoFile(){
+        
+    }
+    
+    public void removeCredentialinFile(){
+        
+    }
+    
+    
+            
+       
     
 }
