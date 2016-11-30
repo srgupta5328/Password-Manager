@@ -89,7 +89,7 @@ public class Credentials {
 //    }    
     
     
-    public void addCredential(int user_id, String username, String password, String label)
+    public int addCredential(int user_id, String username, String password, String label)
     {
         try {
             DriverManager.registerDriver(new org.apache.derby.jdbc.ClientDriver());
@@ -112,6 +112,8 @@ public class Credentials {
         } catch (SQLException ex) {
             Logger.getLogger(Credentials.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        return updateValue;
     }   
     
     private Connection getConnection()
