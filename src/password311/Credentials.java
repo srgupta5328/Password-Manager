@@ -94,7 +94,7 @@ public class Credentials {
         try {
             DriverManager.registerDriver(new org.apache.derby.jdbc.ClientDriver());
             connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD); 
-            insertCredential = connection.prepareStatement("INSERT INTO CREDENTIAL (USER_ID, USERNAME, PASSWORD, LABEL) values (?, ?, ?, ?)");
+            insertCredential = connection.prepareStatement("INSERT INTO CREDENTIAL (ID, USERNAME, PASSWORD, LABEL) values (?, ?, ?, ?)");
             insertCredential.setInt(1, user_id);
             insertCredential.setString(2, username); 
             insertCredential.setString(3, password); 
