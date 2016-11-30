@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -43,25 +44,41 @@ public class Credentials {
         return aCredential;
     }
     
-//    public ArrayList<String> getCredentials()
-//    {
-//        try {
-//            //needs to be updated to select something from credential table
-//            pst = getConnection().prepareStatement("Select NAME from HOLIDAY");
-//            rs = pst.executeQuery();
-//            
-//            results = new ArrayList<>();
-//            while (rs.next())
-//            {
-//                results.add(rs.getString("NAME"));
-//            }
-//            
-//        } catch (SQLException ex) {
-//            Logger.getLogger(Credentials.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        
-//        return results;
-//    }
+    public void getCredentials()//ArrayList<String> getCredentials()
+    {
+        try {
+            //needs to be updated to select something from credential table
+            DriverManager.registerDriver(new org.apache.derby.jdbc.ClientDriver());
+            connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD); 
+            pst = connection.prepareStatement("Select * FROM CREDENTIAL");
+            rs = pst.executeQuery();
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columnsNumber = rsmd.getColumnCount();
+           
+            //print all the credentials
+            while (rs.next()) {
+//Print one row          
+        for(int i = 1 ; i <= columnsNumber; i++){
+
+            System.out.print(rs.getString(i) + " "); //Print one element of a row
+
+        }   
+
+         System.out.println();//Move to the next line to print the next row.           
+
+         }
+          //  results = new ArrayList<>();
+           // while (rs.next())
+           // {
+            //    results.add(rs.getString("CREDENTIAL"));
+           // }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Credentials.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        //return results;
+    }
     
 //    public ArrayList getStatus(String credentialName)
 //    {
@@ -121,4 +138,5 @@ public class Credentials {
         return CredentialList.getConnection();
     }    
 }
+
 
