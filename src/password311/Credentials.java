@@ -5,6 +5,7 @@
  */
 package password311;
 
+import java.awt.Component;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -146,6 +147,26 @@ public class Credentials {
            // System.out.println("3");
     }    
         
+    public void searchCredentials(String searchTerm) throws SQLException
+    {
+     ResultSet rs1;
+        DriverManager.registerDriver(new org.apache.derby.jdbc.ClientDriver());
+     
+        connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
+      
+        pst = connection.prepareStatement("Select * FROM CREDENTIAL WHERE USERNAME = ? union Select * FROM CREDENTIAL WHERE PASSWORD = ? union Select * FROM CREDENTIAL WHERE LABEL = ?");
+        pst.setString(1, searchTerm);
+        pst.setString(2, searchTerm);
+        pst.setString(3, searchTerm);
+  
+        rs1 = pst.executeQuery();
+        
+            JTable table = new JTable(buildTableModel(rs1));
+ 
+            JOptionPane.showMessageDialog(null, new JScrollPane(table));
+   
+    }   
+    
     public void showCredentials() throws SQLException
     {
           //  ResultSet rss;
