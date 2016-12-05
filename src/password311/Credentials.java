@@ -87,6 +87,65 @@ public class Credentials {
         //return results;
     }
     
+    /**
+     *
+     * @param searchTerm
+     * @throws SQLException
+     */
+    public void searchCredentialUser(String searchTerm) throws SQLException
+    {
+     
+        DriverManager.registerDriver(new org.apache.derby.jdbc.ClientDriver());
+      //  System.out.println("X");
+        connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
+      //  System.out.println("Y");
+        pst = connection.prepareStatement("Select * FROM CREDENTIAL WHERE USERNAME = ?");
+        pst.setString(1, searchTerm);
+       // System.out.println("Z");
+        rs = pst.executeQuery();
+   //System.out.println("1");
+            JTable table = new JTable(buildTableModel(rs));
+            //System.out.println("2");
+            JOptionPane.showMessageDialog(null, new JScrollPane(table));
+           // System.out.println("3");
+    }
+    
+        public void searchCredentialPass(String searchTerm) throws SQLException
+    {
+     
+        DriverManager.registerDriver(new org.apache.derby.jdbc.ClientDriver());
+      //  System.out.println("X");
+        connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
+      //  System.out.println("Y");
+        pst = connection.prepareStatement("Select * FROM CREDENTIAL WHERE PASSWORD = ?");
+        pst.setString(1, searchTerm);
+       // System.out.println("Z");
+        rs = pst.executeQuery();
+   //System.out.println("1");
+            JTable table = new JTable(buildTableModel(rs));
+            //System.out.println("2");
+            JOptionPane.showMessageDialog(null, new JScrollPane(table));
+           // System.out.println("3");
+    }
+    
+    public void searchCredentialLabel(String searchTerm) throws SQLException
+    {
+     
+        DriverManager.registerDriver(new org.apache.derby.jdbc.ClientDriver());
+      //  System.out.println("X");
+        connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
+      //  System.out.println("Y");
+        pst = connection.prepareStatement("Select * FROM CREDENTIAL WHERE LABEL = ?");
+        pst.setString(1, searchTerm);
+       // System.out.println("Z");
+        rs = pst.executeQuery();
+   //System.out.println("1");
+            JTable table = new JTable(buildTableModel(rs));
+            //System.out.println("2");
+            JOptionPane.showMessageDialog(null, new JScrollPane(table));
+           // System.out.println("3");
+    }    
+        
     public void showCredentials() throws SQLException
     {
           //  ResultSet rss;
@@ -187,4 +246,3 @@ DriverManager.registerDriver(new org.apache.derby.jdbc.ClientDriver());
         return CredentialList.getConnection();
     }    
 }
-
