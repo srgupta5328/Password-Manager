@@ -70,6 +70,7 @@ public class Credentials {
 
             System.out.print(rs.getString(i) + " "); //Print one element of a row
 
+                pst.close();
         }   
 
          System.out.println();//Move to the next line to print the next row.           
@@ -86,6 +87,61 @@ public class Credentials {
         }
         
         //return results;
+    }
+    
+    
+    public void updateCredentialUser(int ID, String newUser) throws SQLException
+    {
+      DriverManager.registerDriver(new org.apache.derby.jdbc.ClientDriver());    
+        connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);    
+        pst = connection.prepareStatement("Update CREDENTIAL SET USERNAME = ? WHERE ID = ?");  
+        pst.setString(1, newUser);
+        pst.setInt(2, ID);
+        pst.executeUpdate();
+        pst.close();
+        
+        pst = connection.prepareStatement("Select * FROM CREDENTIAL WHERE ID = ?");
+        pst.setInt(1, ID);
+        rs = pst.executeQuery();
+            JTable table = new JTable(buildTableModel(rs));
+            JOptionPane.showMessageDialog(null, new JScrollPane(table));
+            pst.close();
+    }
+    
+    public void updateCredentialPass(int ID, String newPass) throws SQLException
+    {
+      DriverManager.registerDriver(new org.apache.derby.jdbc.ClientDriver());    
+        connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);    
+        pst = connection.prepareStatement("Update CREDENTIAL SET PASSWORD = ? WHERE ID = ?");  
+        pst.setString(1, newPass);
+        pst.setInt(2, ID);
+        pst.executeUpdate();
+        pst.close();
+        
+        pst = connection.prepareStatement("Select * FROM CREDENTIAL WHERE ID = ?");
+        pst.setInt(1, ID);
+        rs = pst.executeQuery();
+            JTable table = new JTable(buildTableModel(rs));
+            JOptionPane.showMessageDialog(null, new JScrollPane(table));
+            pst.close();
+    }
+    
+    public void updateCredentialLabel(int ID, String newLabel) throws SQLException
+    {
+      DriverManager.registerDriver(new org.apache.derby.jdbc.ClientDriver());    
+        connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);    
+        pst = connection.prepareStatement("Update CREDENTIAL SET LABEL = ? WHERE ID = ?");  
+        pst.setString(1, newLabel);
+        pst.setInt(2, ID);
+        pst.executeUpdate();
+        pst.close();
+        
+        pst = connection.prepareStatement("Select * FROM CREDENTIAL WHERE ID = ?");
+        pst.setInt(1, ID);
+        rs = pst.executeQuery();
+            JTable table = new JTable(buildTableModel(rs));
+            JOptionPane.showMessageDialog(null, new JScrollPane(table));
+            pst.close();
     }
     
     /**
@@ -108,6 +164,7 @@ public class Credentials {
             JTable table = new JTable(buildTableModel(rs));
             //System.out.println("2");
             JOptionPane.showMessageDialog(null, new JScrollPane(table));
+            pst.close();
            // System.out.println("3");
     }
     
@@ -126,6 +183,7 @@ public class Credentials {
             JTable table = new JTable(buildTableModel(rs));
             //System.out.println("2");
             JOptionPane.showMessageDialog(null, new JScrollPane(table));
+            pst.close();
            // System.out.println("3");
     }
     
@@ -144,6 +202,7 @@ public class Credentials {
             JTable table = new JTable(buildTableModel(rs));
             //System.out.println("2");
             JOptionPane.showMessageDialog(null, new JScrollPane(table));
+            pst.close();
            // System.out.println("3");
     }    
         
@@ -164,7 +223,7 @@ public class Credentials {
             JTable table = new JTable(buildTableModel(rs1));
  
             JOptionPane.showMessageDialog(null, new JScrollPane(table));
-   
+   pst.close();
     }   
     
     public void showCredentials() throws SQLException
@@ -181,6 +240,7 @@ DriverManager.registerDriver(new org.apache.derby.jdbc.ClientDriver());
     // Closes the Connection
 
     JOptionPane.showMessageDialog(null, new JScrollPane(table));
+    pst.close();
     }
     
     
@@ -254,12 +314,14 @@ DriverManager.registerDriver(new org.apache.derby.jdbc.ClientDriver());
 //            insertCredential = getConnection().prepareStatement("INSERT INTO CREDENTIAL (LABEL) values (?)");
 //            insertCredential.setString(1, label);  
 //            updateValue = insertCredential.executeUpdate();
+            insertCredential.close();
             
         } catch (SQLException ex) {
             Logger.getLogger(Credentials.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return updateValue;
+        
     }   
     
     private Connection getConnection()
