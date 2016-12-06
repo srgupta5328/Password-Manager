@@ -14,8 +14,9 @@ public class MainApp {
         final JFrame viewCredFrame = new JFrame("View Credentials");
         final JButton btnAdd = new JButton("Add"); 
         final JButton btnGenerate = new JButton("Generate"); 
-        final JButton btnViewCred = new JButton("viewCred"); 
+        final JButton btnViewCred = new JButton("View Credentials"); 
          btnAdd.setVisible(false);
+         btnViewCred.setVisible(false);
         
         
         
@@ -23,11 +24,12 @@ public class MainApp {
                 new ActionListener(){
                     public void actionPerformed(ActionEvent e) {
                         LoginDialog loginDlg = new LoginDialog(frame);
-                        loginDlg.setVisible(true);
+                       loginDlg.setVisible(true);
                         if(loginDlg.isSucceeded()){
-                            btnLogin.setText("Hi " + loginDlg.getUsername() + "!");
+                           btnLogin.setText("Hi " + loginDlg.getUsername() + "!");
                             btnRegister.setVisible(false);
                          btnAdd.setVisible(true);
+                         btnViewCred.setVisible(true);
                         }
                     }
                 });

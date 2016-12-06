@@ -167,7 +167,7 @@ public class AddCredentialDialog extends javax.swing.JDialog {
                  {
                      successful = Credentials.getInstance().addCredential(getUserID(), getUsername(), getPassword(), geabel());
                      System.out.println("Count of listeners: " + ((JButton) e.getSource()).getActionListeners().length);
-                     JOptionPane.showMessageDialog(new javax.swing.JFrame(),"You've clicked Add new credential button");
+                     JOptionPane.showMessageDialog(new javax.swing.JFrame(),"Credential Added to database");
                  }
                   catch(Exception ex)
                     {
