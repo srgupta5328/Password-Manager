@@ -11,9 +11,12 @@ public class MainApp {
         final JFrame regframe = new JFrame("Register an account"); 
         final JButton btnRegister = new JButton("Register an account");
         final JFrame addCredFrame = new JFrame("Add a Credential"); 
+        final JFrame viewCredFrame = new JFrame("View Credentials");
         final JButton btnAdd = new JButton("Add"); 
         final JButton btnGenerate = new JButton("Generate"); 
+        final JButton btnViewCred = new JButton("viewCred"); 
          btnAdd.setVisible(false);
+        
         
         
         btnLogin.addActionListener(
@@ -53,6 +56,16 @@ public class MainApp {
                 
             }
         });
+        
+        btnViewCred.addActionListener(
+            new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                  CredentialListView credView = new CredentialListView(viewCredFrame);
+                  credView.setVisible(true);
+                   
+                }
+          
+            });
  
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 200);
@@ -60,6 +73,7 @@ public class MainApp {
         frame.getContentPane().add(btnLogin);
         frame.getContentPane().add(btnRegister);
         frame.getContentPane().add(btnAdd);
+        frame.getContentPane().add(btnViewCred);
         frame.setVisible(true);
     }
 }
