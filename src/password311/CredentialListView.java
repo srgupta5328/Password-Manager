@@ -23,8 +23,9 @@ public class CredentialListView extends javax.swing.JDialog {
     }
 
     CredentialListView(JFrame viewCredFrame) {
+         
         JOptionPane.showMessageDialog(new javax.swing.JFrame(),"Credential view to open");
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     /**

@@ -2,6 +2,9 @@ package password311;
  
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
  
 public class MainApp {
@@ -63,6 +66,11 @@ public class MainApp {
             new ActionListener(){
                 public void actionPerformed(ActionEvent e){
                   CredentialListView credView = new CredentialListView(viewCredFrame);
+                    try {
+                        Credentials.getInstance().showCredentials();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                   credView.setVisible(true);
                    
                 }
