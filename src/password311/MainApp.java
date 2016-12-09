@@ -97,12 +97,13 @@ public class MainApp {
         
     btnSearchCred.addActionListener(
             new ActionListener(){
-                public void actionPerformed(ActionEvent e, String searchTerm) throws SQLException{
+                @Override
+                public void actionPerformed(ActionEvent e) {
                  // CredentialListView credView = null;
                     try {
                         
                     //    credView = new CredentialListView(viewCredFrame);
-                        Credentials.getInstance().searchCredentialLabel(getSearchTerm());
+                        Credentials.getInstance().searchCredentials(searchField.getText().trim());
                     } catch (SQLException ex) {
                         Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -116,16 +117,22 @@ public class MainApp {
                    
                 }
                 
-                 public String getSearchTerm() {
-                        return searchField.getText().trim(); 
- }
+              //   public String getSearchTerm() {
+               //         return searchField.getText().trim(); 
+ //}
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                throw new UnsupportedOperationException("Search is being built."); //To change body of generated methods, choose Tools | Templates.
-            }
+           // @Override
+           // public void actionPerformed(ActionEvent e) {
+//                throw new UnsupportedOperationException("Search is being built."); //To change body of generated methods, choose Tools | Templates.
+           // }
+
+           // @Override
+           // public void actionPerformed(ActionEvent e) {
+//                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            //}
                
           
+           // });
             });
         
      btnUpdateCred.addActionListener(
@@ -149,7 +156,7 @@ public class MainApp {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            //    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
             });
                 
