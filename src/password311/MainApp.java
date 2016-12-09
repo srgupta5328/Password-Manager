@@ -65,7 +65,12 @@ public class MainApp {
         btnViewCred.addActionListener(
             new ActionListener(){
                 public void actionPerformed(ActionEvent e){
-                  CredentialListView credView = new CredentialListView(viewCredFrame);
+                  CredentialListView credView = null;
+                    try {
+                        credView = new CredentialListView(viewCredFrame);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     try {
                         Credentials.getInstance().showCredentials();
                     } catch (SQLException ex) {

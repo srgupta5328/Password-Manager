@@ -157,7 +157,8 @@ public class AddCredentialDialog extends javax.swing.JDialog {
                         //    count++;
                        // }
                         System.out.println("Count of listeners: " + ((JButton) e.getSource()).getActionListeners().length);
-                        JOptionPane.showMessageDialog(new javax.swing.JFrame(),"You've clicked Add new credential button");
+                        Credentials.getInstance().addCredential(4, USERNAME, PASSWORD, USERNAME); 
+                        //JOptionPane.showMessageDialog(new javax.swing.JFrame(),"You've clicked Add new credential button");
                     }
                 });
              }

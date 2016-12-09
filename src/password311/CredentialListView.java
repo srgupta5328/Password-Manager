@@ -5,8 +5,13 @@
  */
 package password311;
 
+import java.sql.SQLException;
+import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -22,10 +27,21 @@ public class CredentialListView extends javax.swing.JDialog {
         initComponents(); 
     }
 
-    CredentialListView(JFrame viewCredFrame) {
-         
-        JOptionPane.showMessageDialog(new javax.swing.JFrame(),"Credential view to open");
+    CredentialListView(JFrame viewCredFrame, String searchTerm) {
+        Scanner userInput = new Scanner (System.in); 
+         searchTerm = userInput.nextLine(); 
+        try {
+            Credentials.getInstance().searchCredentialLabel(searchTerm);
+        } catch (SQLException ex) {
+            Logger.getLogger(CredentialListView.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
+        
+    }
+
+    CredentialListView(JFrame viewCredFrame) throws SQLException {
+        Credentials.getInstance().showCredentials(); 
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
