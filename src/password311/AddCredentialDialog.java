@@ -157,7 +157,7 @@ public class AddCredentialDialog extends javax.swing.JDialog {
                         //    count++;
                        // }
                         System.out.println("Count of listeners: " + ((JButton) e.getSource()).getActionListeners().length);
-                        Credentials.getInstance().addCredential(4, USERNAME, PASSWORD, USERNAME); 
+                        Credentials.getInstance().addCredential(2, USERNAME, PASSWORD, USERNAME); 
                         //JOptionPane.showMessageDialog(new javax.swing.JFrame(),"You've clicked Add new credential button");
                     }
                 });
@@ -176,9 +176,9 @@ public class AddCredentialDialog extends javax.swing.JDialog {
                     }
                // finally
                // {
-                    // successful = Credentials.getInstance().addCredential(getUserID(), getUsername(), getPassword(), geabel());
-                    // System.out.println("Count of listeners: " + ((JButton) e.getSource()).getActionListeners().length);
-                     //JOptionPane.showMessageDialog(new javax.swing.JFrame(),"You've clicked Add new credential button");
+                   // successful = Credentials.getInstance().addCredential(getUserID(), getUsername(), getPassword(), geabel());
+                    //System.out.println("Count of listeners: " + ((JButton) e.getSource()).getActionListeners().length);
+                    // JOptionPane.showMessageDialog(new javax.swing.JFrame(),"You've clicked Add new credential button");
                 //}
             }    
             

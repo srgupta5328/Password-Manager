@@ -2,6 +2,7 @@ package password311;
  
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,13 +19,19 @@ public class MainApp {
         final JButton btnAdd = new JButton("Add"); 
         final JButton btnGenerate = new JButton("Generate"); 
         final JButton btnViewCred = new JButton("View Credentials"); 
+        final JButton btnSearchCred = new JButton("Search Credentials");
+        final JButton btnUpdateCred = new JButton ("Update Credentials"); 
          btnAdd.setVisible(false);
          btnViewCred.setVisible(false);
+         btnSearchCred.setVisible(false);
+         btnUpdateCred.setVisible(false);
+         btnSearchCred.setVisible(false);
         
         
         
         btnLogin.addActionListener(
                 new ActionListener(){
+                    @Override
                     public void actionPerformed(ActionEvent e) {
                         LoginDialog loginDlg = new LoginDialog(frame);
                        loginDlg.setVisible(true);
@@ -33,11 +40,14 @@ public class MainApp {
                             btnRegister.setVisible(false);
                          btnAdd.setVisible(true);
                          btnViewCred.setVisible(true);
+                         btnSearchCred.setVisible(true);
+                         btnUpdateCred.setVisible(true);
                         }
                     }
                 });
         btnRegister.addActionListener(
             new ActionListener(){
+                @Override
                 public void actionPerformed(ActionEvent e){
                     RegisterDialog registerDlg = new RegisterDialog(regframe);
                     registerDlg.setVisible(true);
@@ -55,6 +65,7 @@ public class MainApp {
             });
         btnGenerate.addActionListener(
         new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 AddCredentialDialog generatedlg = new AddCredentialDialog(addCredFrame);
                     generatedlg.setVisible(true);
@@ -64,6 +75,7 @@ public class MainApp {
         
         btnViewCred.addActionListener(
             new ActionListener(){
+                @Override
                 public void actionPerformed(ActionEvent e){
                   CredentialListView credView = null;
                     try {
@@ -74,12 +86,57 @@ public class MainApp {
                     try {
                         Credentials.getInstance().showCredentials();
                     } catch (SQLException ex) {
-                        Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+                       
                     }
                   credView.setVisible(true);
                    
                 }
+                
           
+            });
+        
+    btnSearchCred.addActionListener(
+            new ActionListener(){
+                public void actionPerformed(ActionEvent e, String searchTerm) throws SQLException{
+                  CredentialListView credView = null;
+                    try {
+                        credView = new CredentialListView(viewCredFrame);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    Credentials.getInstance().searchCredentialLabel(searchTerm);
+                    Credentials.getInstance().searchCredentialPass(searchTerm);
+                    Credentials.getInstance().searchCredentials(searchTerm);
+                    Credentials.getInstance().searchCredentials(searchTerm);
+                  credView.setVisible(true);
+                  
+                   
+                }
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                throw new UnsupportedOperationException("Search is being built."); //To change body of generated methods, choose Tools | Templates.
+            }
+                
+          
+            });
+        
+     btnUpdateCred.addActionListener(
+            new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e){
+                   CredentialListView credView = null;
+                    try {
+                        credView = new CredentialListView(viewCredFrame);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+ 
+                            
+                  credView.setVisible(true);
+                   
+                }
+                
+                }
             });
  
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -89,6 +146,8 @@ public class MainApp {
         frame.getContentPane().add(btnRegister);
         frame.getContentPane().add(btnAdd);
         frame.getContentPane().add(btnViewCred);
+        frame.getContentPane().add(btnSearchCred); 
+        frame.getContentPane().add(btnUpdateCred); 
         frame.setVisible(true);
     }
 }
