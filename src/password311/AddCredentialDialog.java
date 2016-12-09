@@ -156,8 +156,8 @@ public class AddCredentialDialog extends javax.swing.JDialog {
                         //   successful = Credentials.getInstance().addCredential(getUserID()+count, getUsername(), getPassword(), geabel());
                         //    count++;
                        // }
-                        System.out.println("Count of listeners: " + ((JButton) e.getSource()).getActionListeners().length);
-                        Credentials.getInstance().addCredential(2, USERNAME, PASSWORD, USERNAME); 
+                        //System.out.println("Count of listeners: " + ((JButton) e.getSource()).getActionListeners().length);
+                       // Credentials.getInstance().addCredential(2, USERNAME, PASSWORD, USERNAME); 
                         //JOptionPane.showMessageDialog(new javax.swing.JFrame(),"You've clicked Add new credential button");
                     }
                 });
@@ -167,7 +167,7 @@ public class AddCredentialDialog extends javax.swing.JDialog {
                  try
                  {
                      successful = Credentials.getInstance().addCredential(getUserID(), getUsername(), getPassword(), geabel());
-                     System.out.println("Count of listeners: " + ((JButton) e.getSource()).getActionListeners().length);
+                    // System.out.println("Count of listeners: " + ((JButton) e.getSource()).getActionListeners().length);
                      JOptionPane.showMessageDialog(new javax.swing.JFrame(),"Credential Added to database");
                  }
                   catch(Exception ex)
