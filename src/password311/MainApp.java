@@ -22,13 +22,14 @@ public class MainApp {
         final JButton btnSearchCred = new JButton("Search Credentials");
         final JTextField searchField = new JTextField(20); 
         final JButton btnUpdateCred = new JButton ("Update Credentials");
-        btnAdd.setVisible(false);
+        final  JButton btnLogOut = new JButton("LogOut"); 
+         btnAdd.setVisible(false);
          btnViewCred.setVisible(false);
          btnSearchCred.setVisible(false);
          btnUpdateCred.setVisible(false);
          btnSearchCred.setVisible(false);
          searchField.setVisible(false); 
-        
+        btnLogOut.setVisible(false);
         
         
         btnLogin.addActionListener(
@@ -45,6 +46,7 @@ public class MainApp {
                          btnSearchCred.setVisible(true);
                          btnUpdateCred.setVisible(true);
                         searchField.setVisible(true); 
+                         btnLogOut.setVisible(true);
                         }
                     }
                 });
@@ -134,6 +136,13 @@ public class MainApp {
           
            // });
             });
+    
+        
+        btnLogOut.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
         
      btnUpdateCred.addActionListener(
             new ActionListener(){
@@ -159,8 +168,8 @@ public class MainApp {
             //    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
             });
-                
      
+        
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 200);
         frame.setLayout(new FlowLayout());
@@ -171,6 +180,7 @@ public class MainApp {
         frame.getContentPane().add(btnSearchCred); 
         frame.getContentPane().add(btnUpdateCred);
         frame.getContentPane().add(searchField);
+        frame.getContentPane().add(btnLogOut);
         
         frame.setVisible(true);
     }
