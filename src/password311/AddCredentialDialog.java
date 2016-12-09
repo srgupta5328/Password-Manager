@@ -115,8 +115,15 @@ public class AddCredentialDialog extends javax.swing.JDialog {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                    //JOptionPane.showInputDialog(Password.makePassword(12)); 
+                     if(tfPassword.getText().equals(""))
+                     {     
                    tfPassword.setText(PasswordGenerator.getInstance().makePassword(12));
                    JOptionPane.showMessageDialog(new javax.swing.JFrame(),"New Password Generated:"+getPassword());
+                     }
+                      else
+                     {
+                         JOptionPane.showMessageDialog(new javax.swing.JFrame(),"Field Must Be Empty To Generate");
+                     }
                  //  JOptionPane.showInputDialog(tfPassword, PasswordGenerator.makePassword(12));
                    // user Copies the password provided and inputs it into the dialog box
                    // copy whats inside the dialog box into the main password text field
@@ -130,8 +137,15 @@ public class AddCredentialDialog extends javax.swing.JDialog {
                  {
                      //successful = Credentials.getInstance().addCredential(getUserID(), getUsername(), getPassword(), geabel());
                     // System.out.println("Count of listeners: " + ((JButton) e.getSource()).getActionListeners().length);
+                     if(tfPassword.getText().equals(""))
+                     {
                      tfPassword.setText(PasswordGenerator.getInstance().makePassword(12));
                      JOptionPane.showMessageDialog(new javax.swing.JFrame(),"New Password Generated:"+getPassword());
+                     }
+                     else
+                     {
+                         JOptionPane.showMessageDialog(new javax.swing.JFrame(),"Field Must Be Empty To Generate");
+                     }
                  }
                   catch(Exception ex)
                     {
