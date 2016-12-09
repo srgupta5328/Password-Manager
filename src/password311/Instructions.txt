@@ -1,0 +1,14 @@
+When logging in to the application,
+
+Username: Rohan
+Password: Hello 
+
+
+When Generating a password:
+
+1. CLick Generate
+2. Enter generated code in text field
+3. Cntrl C to copy
+4. close out generated password screen
+5. Cntrl V to paste password into Password text field. 
+

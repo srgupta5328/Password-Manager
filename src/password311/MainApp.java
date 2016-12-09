@@ -10,7 +10,7 @@ import javax.swing.*;
  
 public class MainApp {
     public static void main(String[] args) {
-        final JFrame frame = new JFrame("Password Management Login");
+        final JFrame frame = new JFrame("Password Management");
         final JButton btnLogin = new JButton("Click to login to your account");
         final JFrame regframe = new JFrame("Register an account"); 
         final JButton btnRegister = new JButton("Register an account");
@@ -20,12 +20,14 @@ public class MainApp {
         final JButton btnGenerate = new JButton("Generate"); 
         final JButton btnViewCred = new JButton("View Credentials"); 
         final JButton btnSearchCred = new JButton("Search Credentials");
-        final JButton btnUpdateCred = new JButton ("Update Credentials"); 
-         btnAdd.setVisible(false);
+        final JTextField searchField = new JTextField(20); 
+        final JButton btnUpdateCred = new JButton ("Update Credentials");
+        btnAdd.setVisible(false);
          btnViewCred.setVisible(false);
          btnSearchCred.setVisible(false);
          btnUpdateCred.setVisible(false);
          btnSearchCred.setVisible(false);
+         searchField.setVisible(false); 
         
         
         
@@ -42,9 +44,11 @@ public class MainApp {
                          btnViewCred.setVisible(true);
                          btnSearchCred.setVisible(true);
                          btnUpdateCred.setVisible(true);
+                        searchField.setVisible(true); 
                         }
                     }
                 });
+        
         btnRegister.addActionListener(
             new ActionListener(){
                 @Override
@@ -96,8 +100,9 @@ public class MainApp {
                 public void actionPerformed(ActionEvent e, String searchTerm) throws SQLException{
                  // CredentialListView credView = null;
                     try {
+                        
                     //    credView = new CredentialListView(viewCredFrame);
-                        Credentials.getInstance().searchCredentialLabel(searchTerm);
+                        Credentials.getInstance().searchCredentialLabel(getSearchTerm());
                     } catch (SQLException ex) {
                         Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -106,15 +111,20 @@ public class MainApp {
                     //Credentials.getInstance().searchCredentials(searchTerm);
                    // Credentials.getInstance().searchCredentials(searchTerm);
                  // credView.setVisible(true);
+                 
                   
                    
                 }
+                
+                 public String getSearchTerm() {
+                        return searchField.getText().trim(); 
+ }
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 throw new UnsupportedOperationException("Search is being built."); //To change body of generated methods, choose Tools | Templates.
             }
-                
+               
           
             });
         
@@ -142,7 +152,8 @@ public class MainApp {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
             });
- 
+                
+     
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 200);
         frame.setLayout(new FlowLayout());
@@ -151,7 +162,9 @@ public class MainApp {
         frame.getContentPane().add(btnAdd);
         frame.getContentPane().add(btnViewCred);
         frame.getContentPane().add(btnSearchCred); 
-        frame.getContentPane().add(btnUpdateCred); 
+        frame.getContentPane().add(btnUpdateCred);
+        frame.getContentPane().add(searchField);
+        
         frame.setVisible(true);
     }
 }
