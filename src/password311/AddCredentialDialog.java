@@ -108,17 +108,36 @@ public class AddCredentialDialog extends javax.swing.JDialog {
         btnGenerate.addActionListener(new ActionListener(){
         
         public void actionPerformed(ActionEvent e){
+             if (btnGenerate.getActionListeners().length<1) 
+             {
              btnGenerate.addActionListener(
                 new ActionListener(){
                     @Override
                     public void actionPerformed(ActionEvent e) {
                    //JOptionPane.showInputDialog(Password.makePassword(12)); 
-                   JOptionPane.showInputDialog(tfPassword, PasswordGenerator.makePassword(12));
+                   tfPassword.setText(PasswordGenerator.getInstance().makePassword(12));
+                   JOptionPane.showMessageDialog(new javax.swing.JFrame(),"New Password Generated:"+getPassword());
+                 //  JOptionPane.showInputDialog(tfPassword, PasswordGenerator.makePassword(12));
                    // user Copies the password provided and inputs it into the dialog box
                    // copy whats inside the dialog box into the main password text field
                    
                     }
                 });
+             }
+             else
+             {
+                try
+                 {
+                     //successful = Credentials.getInstance().addCredential(getUserID(), getUsername(), getPassword(), geabel());
+                    // System.out.println("Count of listeners: " + ((JButton) e.getSource()).getActionListeners().length);
+                     tfPassword.setText(PasswordGenerator.getInstance().makePassword(12));
+                     JOptionPane.showMessageDialog(new javax.swing.JFrame(),"New Password Generated:"+getPassword());
+                 }
+                  catch(Exception ex)
+                    {
+                     System.out.println('F'); //failure
+                    } 
+             }
             }
         }); 
         
@@ -389,4 +408,3 @@ public class AddCredentialDialog extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField3;
     // End of variables declaration                   
 }
-
