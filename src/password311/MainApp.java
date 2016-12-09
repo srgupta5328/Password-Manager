@@ -77,18 +77,14 @@ public class MainApp {
             new ActionListener(){
                 @Override
                 public void actionPerformed(ActionEvent e){
-                  CredentialListView credView = null;
-                    try {
-                        credView = new CredentialListView(viewCredFrame);
-                    } catch (SQLException ex) {
-                        Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                 // CredentialListView credView = null;
+                 // credView = new CredentialListView(viewCredFrame);
                     try {
                         Credentials.getInstance().showCredentials();
                     } catch (SQLException ex) {
                        
                     }
-                  credView.setVisible(true);
+                 // credView.setVisible(true);
                    
                 }
                 
@@ -98,17 +94,18 @@ public class MainApp {
     btnSearchCred.addActionListener(
             new ActionListener(){
                 public void actionPerformed(ActionEvent e, String searchTerm) throws SQLException{
-                  CredentialListView credView = null;
+                 // CredentialListView credView = null;
                     try {
-                        credView = new CredentialListView(viewCredFrame);
+                    //    credView = new CredentialListView(viewCredFrame);
+                        Credentials.getInstance().searchCredentialLabel(searchTerm);
                     } catch (SQLException ex) {
                         Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    Credentials.getInstance().searchCredentialLabel(searchTerm);
-                    Credentials.getInstance().searchCredentialPass(searchTerm);
-                    Credentials.getInstance().searchCredentials(searchTerm);
-                    Credentials.getInstance().searchCredentials(searchTerm);
-                  credView.setVisible(true);
+                   // Credentials.getInstance().searchCredentialLabel(searchTerm);
+                   // Credentials.getInstance().searchCredentialPass(searchTerm);
+                    //Credentials.getInstance().searchCredentials(searchTerm);
+                   // Credentials.getInstance().searchCredentials(searchTerm);
+                 // credView.setVisible(true);
                   
                    
                 }
@@ -123,20 +120,27 @@ public class MainApp {
         
      btnUpdateCred.addActionListener(
             new ActionListener(){
-                @Override
-                public void actionPerformed(ActionEvent e){
-                   CredentialListView credView = null;
+              //  @Override
+                public void actionPerformed(ActionEvent e, int ID) throws SQLException {
+                  // CredentialListView credView = null;
                     try {
-                        credView = new CredentialListView(viewCredFrame);
+                    //    credView = new CredentialListView(viewCredFrame);
+                        Credentials.getInstance().updateCredentialUser(ID, null);
                     } catch (SQLException ex) {
                         Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
  
                             
-                  credView.setVisible(true);
+                //  credView.setVisible(true);
                    
                 }
                 
                 }
+                
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
             });
  
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
