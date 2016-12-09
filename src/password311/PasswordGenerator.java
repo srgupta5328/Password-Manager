@@ -10,6 +10,18 @@ package password311;
  * @author rohangupta
  */
 public class PasswordGenerator {
+    static PasswordGenerator aPasswordGenerator = null;
+    
+     public static PasswordGenerator getInstance()
+    {
+        if (aPasswordGenerator == null)
+        {
+            aPasswordGenerator = new PasswordGenerator();
+        }
+        
+        return aPasswordGenerator;
+    }
+    
     public static String generate (String result){
      result = makePassword(12);  
     return result;
