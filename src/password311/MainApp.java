@@ -155,30 +155,35 @@ public class MainApp {
             }
         });
         
-     btnUpdateCred.addActionListener(
-            new ActionListener(){
-              //  @Override
-                public void actionPerformed(ActionEvent e, int ID) throws SQLException {
-                  // CredentialListView credView = null;
-                    try {
-                    //    credView = new CredentialListView(viewCredFrame);
-                        Credentials.getInstance().updateCredentialUser(ID, null);
-                    } catch (SQLException ex) {
-                        Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
- 
-                            
-                //  credView.setVisible(true);
-                   
-                }
-                
-                }
-                
+//     btnUpdateCred.addActionListener(
+//            new ActionListener(){
+//
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//            }
+//              //  @Override
+//               // public void actionPerformed(ActionEvent e, int ID) throws SQLException {
+//                  // CredentialListView credView = null;
+//                  //  try {
+//                    //    credView = new CredentialListView(viewCredFrame);
+//                    //    Credentials.getInstance().updateCredentialUser(ID, null);
+//                   // } catch (SQLException ex) {
+//                      //  Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+// 
+//                            
+//                //  credView.setVisible(true);
+//                   
+//               // }
+//                
+//                });
+//                
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+           // @Override
+            //public void actionPerformed(ActionEvent e) {
             //    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-            });
+           // }
+           // });
      
      
      btnUpdateCred.addActionListener(
