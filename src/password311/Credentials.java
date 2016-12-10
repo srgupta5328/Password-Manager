@@ -100,12 +100,12 @@ public class Credentials {
         pst.executeUpdate();
         pst.close();
         
-        pst = connection.prepareStatement("Select * FROM CREDENTIAL WHERE ID = ?");
-        pst.setInt(1, ID);
-        rs = pst.executeQuery();
-            JTable table = new JTable(buildTableModel(rs));
-            JOptionPane.showMessageDialog(null, new JScrollPane(table));
-            pst.close();
+//        pst = connection.prepareStatement("Select * FROM CREDENTIAL WHERE ID = ?");
+//        pst.setInt(1, ID);
+//        rs = pst.executeQuery();
+//            JTable table = new JTable(buildTableModel(rs));
+//            JOptionPane.showMessageDialog(null, new JScrollPane(table));
+//            pst.close();
     }
     
     public void updateCredentialPass(int ID, String newPass) throws SQLException
@@ -118,12 +118,12 @@ public class Credentials {
         pst.executeUpdate();
         pst.close();
         
-        pst = connection.prepareStatement("Select * FROM CREDENTIAL WHERE ID = ?");
-        pst.setInt(1, ID);
-        rs = pst.executeQuery();
-            JTable table = new JTable(buildTableModel(rs));
-            JOptionPane.showMessageDialog(null, new JScrollPane(table));
-            pst.close();
+//        pst = connection.prepareStatement("Select * FROM CREDENTIAL WHERE ID = ?");
+//        pst.setInt(1, ID);
+//        rs = pst.executeQuery();
+//            JTable table = new JTable(buildTableModel(rs));
+//            JOptionPane.showMessageDialog(null, new JScrollPane(table));
+//            pst.close();
     }
     
     public void updateCredentialLabel(int ID, String newLabel) throws SQLException
@@ -136,12 +136,12 @@ public class Credentials {
         pst.executeUpdate();
         pst.close();
         
-        pst = connection.prepareStatement("Select * FROM CREDENTIAL WHERE ID = ?");
-        pst.setInt(1, ID);
-        rs = pst.executeQuery();
-            JTable table = new JTable(buildTableModel(rs));
-            JOptionPane.showMessageDialog(null, new JScrollPane(table));
-            pst.close();
+//        pst = connection.prepareStatement("Select * FROM CREDENTIAL WHERE ID = ?");
+//        pst.setInt(1, ID);
+//        rs = pst.executeQuery();
+//            JTable table = new JTable(buildTableModel(rs));
+//            JOptionPane.showMessageDialog(null, new JScrollPane(table));
+//            pst.close();
     }
     
     /**
