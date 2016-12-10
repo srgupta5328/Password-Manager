@@ -47,9 +47,11 @@ public class UpdateCredentialDialog extends javax.swing.JDialog {
     private JTextField tfLabel;
     private JTextField tfUsername; 
     private JPasswordField tfPassword;
+    private JTextField tfUserID;
     private JLabel lbLabel; 
     private JLabel lbUsername;
     private JLabel lbPassword; 
+    private JLabel lbUserID;
     private JButton btnCancel;
     private JButton btnUpdate; 
     private JButton btnGenerate;
@@ -105,6 +107,19 @@ public class UpdateCredentialDialog extends javax.swing.JDialog {
         cs.gridy = 2;
         cs.gridwidth = 2;
         panel.add(tfPassword, cs);
+        panel.setBorder(new LineBorder(Color.GRAY));
+        
+        lbUserID = new JLabel("UserID #: ");
+        cs.gridx = 0;
+        cs.gridy = 3;
+        cs.gridwidth = 1;
+        panel.add(lbUserID, cs);
+ 
+        tfUserID = new JTextField(20);
+        cs.gridx = 1;
+        cs.gridy = 3;
+        cs.gridwidth = 1;
+        panel.add(tfUserID, cs);
         panel.setBorder(new LineBorder(Color.GRAY));
         
  
@@ -174,6 +189,8 @@ public class UpdateCredentialDialog extends javax.swing.JDialog {
         //if (JBtn.getActionListeners().length<1)) //the if statement that would work here    
             
         public void actionPerformed(ActionEvent e){
+        if (!tfUserID.getText().equals(""))
+        {
              if (btnUpdate.getActionListeners().length<1) 
              {
                  
@@ -187,19 +204,22 @@ public class UpdateCredentialDialog extends javax.swing.JDialog {
                             
                             if(!tfPassword.getText().equals(""))
                             {
-                            Credentials.getInstance().updateCredentialPass(1,getPassword());
+                            //Credentials.getInstance().updateCredentialPass(1,getPassword());
+                            Credentials.getInstance().updateCredentialPass(getUserIDforUpdate(),getPassword());
                             printTable = 1;
                             }
                             
                             if(!tfUsername.getText().equals(""))
                             {
-                            Credentials.getInstance().updateCredentialUser(1,getUsername());
+                          //  Credentials.getInstance().updateCredentialUser(1,getUsername());
+                            Credentials.getInstance().updateCredentialUser(getUserIDforUpdate(),getUsername());
                             printTable = 1;
                             }
                             
                             if(!tfLabel.getText().equals(""))
                             {
-                            Credentials.getInstance().updateCredentialLabel(1,geabel());
+                          //  Credentials.getInstance().updateCredentialLabel(1,geabel());
+                            Credentials.getInstance().updateCredentialLabel(getUserIDforUpdate(),geabel());
                             printTable = 1;
                             }
                             
@@ -208,8 +228,8 @@ public class UpdateCredentialDialog extends javax.swing.JDialog {
                                 DriverManager.registerDriver(new org.apache.derby.jdbc.ClientDriver());
                                 connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
                                 pst = connection.prepareStatement("Select * FROM CREDENTIAL WHERE ID = ?");
-                                // pst.setInt(1, ID);
-                                pst.setInt(1, 1); //REPLACE THIS WITH THE USER ID FRom input
+                                 pst.setInt(1, getUserIDforUpdate());
+                                //pst.setInt(1, 1); //REPLACE THIS WITH THE USER ID FRom input
                                 rs = pst.executeQuery();
                                 JTable table = new JTable(Credentials.getInstance().buildTableModel(rs));
                                 JOptionPane.showMessageDialog(null, new JScrollPane(table));
@@ -230,19 +250,22 @@ public class UpdateCredentialDialog extends javax.swing.JDialog {
                      
                      if(!tfPassword.getText().equals(""))
                             {
-                            Credentials.getInstance().updateCredentialPass(1,getPassword());
+                            //Credentials.getInstance().updateCredentialPass(1,getPassword());
+                            Credentials.getInstance().updateCredentialPass(getUserIDforUpdate(),getPassword());
                             printTable = 1;
                             }
                             
                             if(!tfUsername.getText().equals(""))
                             {
-                            Credentials.getInstance().updateCredentialUser(1,getUsername());
+                            //Credentials.getInstance().updateCredentialUser(1,getUsername());
+                            Credentials.getInstance().updateCredentialUser(getUserIDforUpdate(),getUsername());
                             printTable = 1;
                             }
                             
                             if(!tfLabel.getText().equals(""))
                             {
-                            Credentials.getInstance().updateCredentialLabel(1,geabel());
+                          //  Credentials.getInstance().updateCredentialLabel(1,geabel());
+                            Credentials.getInstance().updateCredentialLabel(getUserIDforUpdate(),geabel());
                             printTable = 1;
                             }
                             
@@ -252,7 +275,8 @@ public class UpdateCredentialDialog extends javax.swing.JDialog {
                                 connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
                                 pst = connection.prepareStatement("Select * FROM CREDENTIAL WHERE ID = ?");
                                 // pst.setInt(1, ID);
-                                pst.setInt(1, 1); //REPLACE THIS WITH THE USER ID FRom input
+                                pst.setInt(1, getUserIDforUpdate());
+                                //pst.setInt(1, 1); //REPLACE THIS WITH THE USER ID FRom input
                                 rs = pst.executeQuery();
                                 JTable table = new JTable(Credentials.getInstance().buildTableModel(rs));
                                 JOptionPane.showMessageDialog(null, new JScrollPane(table));
@@ -272,7 +296,11 @@ public class UpdateCredentialDialog extends javax.swing.JDialog {
                     // JOptionPane.showMessageDialog(new javax.swing.JFrame(),"You've clicked Add new credential button");
                 //}
             }    
-            
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(new javax.swing.JFrame(),"You must enter the proper ID to update a Credential.");
+        }
    }});   
         
          JPanel addCredentialScreen = new JPanel();
@@ -302,6 +330,12 @@ public class UpdateCredentialDialog extends javax.swing.JDialog {
         return new String(tfPassword.getPassword());
     }
  
+    public int getUserIDforUpdate() {
+        String newUserID;
+        newUserID = tfUserID.getText();
+        return Integer.parseInt(newUserID);
+    }
+    
     public int getUserID() {
   
         int rowcount = 0;
