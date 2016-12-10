@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -25,6 +26,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
@@ -56,6 +59,9 @@ public class UpdateCredentialDialog extends javax.swing.JDialog {
     private final String PASSWORD = "Hello";
     private static Connection connection;
     private int successful;
+    private int printTable;
+    private PreparedStatement pst;
+    private ResultSet rs;
     
     public UpdateCredentialDialog(Frame parent){
         super(parent,"Update Credential", true);
@@ -113,6 +119,7 @@ public class UpdateCredentialDialog extends javax.swing.JDialog {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                    //JOptionPane.showInputDialog(Password.makePassword(12)); 
+                     
                      if(tfPassword.getText().equals(""))
                      {     
                    tfPassword.setText(PasswordGenerator.getInstance().makePassword(12));
@@ -174,22 +181,44 @@ public class UpdateCredentialDialog extends javax.swing.JDialog {
                 new ActionListener(){ 
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                       // successful = 0;
-                        successful = Credentials.getInstance().addCredential(getUserID(), getUsername(), getPassword(), geabel());
-                        //idk what return values to expect from this anyway
-                        //we need a feature that checks if userID is less than or equal to the id of the last entry and
-                        //makes the user id 1 greater than that of the last entry, or literally just always add 1 to the last entry
-                        //just need to figure out how to always grab the last entry's id
-                        
-                       // int count = 0;
-                        //while (successful != 1)
-                        //{
-                        //   successful = Credentials.getInstance().addCredential(getUserID()+count, getUsername(), getPassword(), geabel());
-                        //    count++;
-                       // }
-                        //System.out.println("Count of listeners: " + ((JButton) e.getSource()).getActionListeners().length);
-                       // Credentials.getInstance().addCredential(2, USERNAME, PASSWORD, USERNAME); 
-                        //JOptionPane.showMessageDialog(new javax.swing.JFrame(),"You've clicked Add new credential button");
+                        try {
+              
+                            printTable = 0;
+                            
+                            if(!tfPassword.getText().equals(""))
+                            {
+                            Credentials.getInstance().updateCredentialPass(1,getPassword());
+                            printTable = 1;
+                            }
+                            
+                            if(!tfUsername.getText().equals(""))
+                            {
+                            Credentials.getInstance().updateCredentialUser(1,getUsername());
+                            printTable = 1;
+                            }
+                            
+                            if(!tfLabel.getText().equals(""))
+                            {
+                            Credentials.getInstance().updateCredentialLabel(1,geabel());
+                            printTable = 1;
+                            }
+                            
+                            if(printTable == 1)
+                            {
+                                DriverManager.registerDriver(new org.apache.derby.jdbc.ClientDriver());
+                                connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
+                                pst = connection.prepareStatement("Select * FROM CREDENTIAL WHERE ID = ?");
+                                // pst.setInt(1, ID);
+                                pst.setInt(1, 1); //REPLACE THIS WITH THE USER ID FRom input
+                                rs = pst.executeQuery();
+                                JTable table = new JTable(Credentials.getInstance().buildTableModel(rs));
+                                JOptionPane.showMessageDialog(null, new JScrollPane(table));
+                                 pst.close();
+                            }
+                     
+                        } catch (SQLException ex) {
+                            Logger.getLogger(UpdateCredentialDialog.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                 });
              }
@@ -197,10 +226,39 @@ public class UpdateCredentialDialog extends javax.swing.JDialog {
              {
                  try
                  {
-                     //successful = Credentials.getInstance().updateCredentialPass(geabel(),getPassword()); 
-                     successful = Credentials.getInstance().addCredential(getUserID(), getUsername(), getPassword(), geabel());
-                    // System.out.println("Count of listeners: " + ((JButton) e.getSource()).getActionListeners().length);
-                     JOptionPane.showMessageDialog(new javax.swing.JFrame(),"Credential Updated in database");
+                     printTable = 0;
+                     
+                     if(!tfPassword.getText().equals(""))
+                            {
+                            Credentials.getInstance().updateCredentialPass(1,getPassword());
+                            printTable = 1;
+                            }
+                            
+                            if(!tfUsername.getText().equals(""))
+                            {
+                            Credentials.getInstance().updateCredentialUser(1,getUsername());
+                            printTable = 1;
+                            }
+                            
+                            if(!tfLabel.getText().equals(""))
+                            {
+                            Credentials.getInstance().updateCredentialLabel(1,geabel());
+                            printTable = 1;
+                            }
+                            
+                            if(printTable == 1)
+                            {
+                                DriverManager.registerDriver(new org.apache.derby.jdbc.ClientDriver());
+                                connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
+                                pst = connection.prepareStatement("Select * FROM CREDENTIAL WHERE ID = ?");
+                                // pst.setInt(1, ID);
+                                pst.setInt(1, 1); //REPLACE THIS WITH THE USER ID FRom input
+                                rs = pst.executeQuery();
+                                JTable table = new JTable(Credentials.getInstance().buildTableModel(rs));
+                                JOptionPane.showMessageDialog(null, new JScrollPane(table));
+                                 pst.close();
+                            }
+   
                  }
                   catch(Exception ex)
                     {
@@ -277,7 +335,7 @@ public class UpdateCredentialDialog extends javax.swing.JDialog {
      * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -294,7 +352,7 @@ public class UpdateCredentialDialog extends javax.swing.JDialog {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
     /**
      * @param args the command line arguments
@@ -338,6 +396,6 @@ public class UpdateCredentialDialog extends javax.swing.JDialog {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    // End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify                     
+    // End of variables declaration                   
 }
