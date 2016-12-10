@@ -11,7 +11,7 @@ import javax.swing.*;
 public class MainApp {
     public static void main(String[] args) {
         final JFrame frame = new JFrame("Password Management");
-        final JButton btnLogin = new JButton("Click to login to your account");
+        final JButton btnLogin = new JButton("Login");
         final JFrame regframe = new JFrame("Register an account"); 
         final JButton btnRegister = new JButton("Register an account");
         final JFrame addCredFrame = new JFrame("Add a Credential"); 
@@ -40,7 +40,7 @@ public class MainApp {
                         LoginDialog loginDlg = new LoginDialog(frame);
                        loginDlg.setVisible(true);
                         if(loginDlg.isSucceeded()){
-                           btnLogin.setText("Hi " + loginDlg.getUsername() + "!");
+                          btnLogin.setText("Hi " + loginDlg.getUsername() + "!");
                             btnRegister.setVisible(false);
                          btnAdd.setVisible(true);
                          btnViewCred.setVisible(true);
