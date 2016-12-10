@@ -40,6 +40,19 @@ public class MainApp {
                         LoginDialog loginDlg = new LoginDialog(frame);
                        loginDlg.setVisible(true);
                         if(loginDlg.isSucceeded()){
+                            try {
+                                btnLogin.setText("Hi " + loginDlg.getUsername() + "!");
+                                btnRegister.setVisible(false);
+                                btnAdd.setVisible(true);
+                                btnViewCred.setVisible(true);
+                                btnSearchCred.setVisible(true);
+                                btnUpdateCred.setVisible(true);
+                                searchField.setVisible(true);
+                                btnLogOut.setVisible(true);
+                                Credentials.getInstance().decryptAllCredentials();
+                            } catch (SQLException ex) {
+                                Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                           btnLogin.setText("Hi " + loginDlg.getUsername() + "!");
                             btnRegister.setVisible(false);
                          btnAdd.setVisible(true);
@@ -141,7 +154,12 @@ public class MainApp {
         
         btnLogOut.addActionListener(new ActionListener(){
         public void actionPerformed(ActionEvent e) {
+            try {
+                Credentials.getInstance().encryptAllCredentials();
                 System.exit(0);
+            } catch (SQLException ex) {
+                Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+            }
             }
         });
         

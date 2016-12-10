@@ -28,6 +28,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Credentials {
     private PreparedStatement pst;
+    private PreparedStatement pst2;
     private PreparedStatement status;
     private PreparedStatement insertCredential;
     private int updateValue;
@@ -39,6 +40,10 @@ public class Credentials {
     private final String PASSWORD = "Hello";
     private static Connection connection;
     private Statement stmt;
+    private String decryptedPassword;
+    private String encryptedPassword;
+    private int numberOfUsers;
+    private int usersDone;
     
     //private Credentials(){};
     
@@ -124,6 +129,99 @@ public class Credentials {
 //            JTable table = new JTable(buildTableModel(rs));
 //            JOptionPane.showMessageDialog(null, new JScrollPane(table));
 //            pst.close();
+    }
+    
+    /**
+     *
+     */
+    public void encryptAllCredentials() throws SQLException
+    {
+        usersDone = 0;
+        numberOfUsers = getNumberUsers();
+        
+        while(usersDone < numberOfUsers)
+        {
+            try {
+                DriverManager.registerDriver(new org.apache.derby.jdbc.ClientDriver());
+                connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
+                pst = connection.prepareStatement("Update CREDENTIAL SET PASSWORD = ? WHERE ID = ?");
+                pst2 = connection.prepareStatement("SELECT PASSWORD FROM CREDENTIAL WHERE ID = ?");
+                pst2.setInt(1, usersDone+1);
+                rs = pst2.executeQuery();
+                rs.next();
+                decryptedPassword = rs.getString(1);
+                //System.out.println("DECRYPTED PASSWORD:");
+                //System.out.print(decryptedPassword);
+                pst.setString(1, AESCrypt.encrypt(decryptedPassword));
+                pst.setInt(2, usersDone+1);
+                pst.executeUpdate();
+                pst.close();
+                pst2.close();
+                
+                
+            } catch (Exception ex) {
+                Logger.getLogger(Credentials.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            usersDone++;
+        }
+    }
+    
+    /**
+     *
+     */
+    public void decryptAllCredentials() throws SQLException
+    {
+        usersDone = 0;
+        numberOfUsers = getNumberUsers();
+       // System.out.print(numberOfUsers);
+        while (usersDone < numberOfUsers)
+        {
+            try {
+                DriverManager.registerDriver(new org.apache.derby.jdbc.ClientDriver());
+                connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);   
+                pst = connection.prepareStatement("SELECT PASSWORD FROM CREDENTIAL WHERE ID = ?");
+                pst2 = connection.prepareStatement("Update CREDENTIAL SET PASSWORD = ? WHERE ID = ?");
+                pst.setInt(1, usersDone+1);
+                rs = pst.executeQuery();
+                rs.next();
+                encryptedPassword = rs.getString(1);
+                //System.out.println("ENCRYPTED PASSWORD:");
+                //System.out.print(encryptedPassword);
+                pst2.setString(1, AESCrypt.decrypt(encryptedPassword));
+                pst2.setInt(2, usersDone+1);
+                pst2.executeUpdate();
+                pst.close();
+                pst2.close(); 
+              
+            } catch (Exception ex) {
+                Logger.getLogger(Credentials.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            usersDone++;
+        }
+    }
+    
+    public int getNumberUsers() {
+  
+        int rowcount = 0;
+        
+        try {
+            DriverManager.registerDriver(new org.apache.derby.jdbc.ClientDriver());
+            connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD); 
+            Statement stmt = connection.createStatement();
+            ResultSet resultSet = stmt.executeQuery("SELECT COUNT(*) FROM CREDENTIAL");
+            resultSet.next();
+            rowcount = resultSet.getInt(1);
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AddCredentialDialog.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   
+        return rowcount; 
+    // Get the number of rows from the result set and add 1 for next user id
+
     }
     
     public void updateCredentialLabel(int ID, String newLabel) throws SQLException
