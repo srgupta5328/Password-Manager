@@ -180,8 +180,10 @@ public class AddCredentialDialog extends javax.swing.JDialog {
                     public void actionPerformed(ActionEvent e) {
                         try {
                             // successful = 0;
-                            successful = Credentials.getInstance().addCredential(getUserID(), getUsername(), AESCrypt.encrypt(getPassword()), geabel());
-                            // successful = Credentials.getInstance().addCredential(getUserID(), getUsername(), getPassword(), geabel());
+                            //successful = Credentials.getInstance().addCredential(getUserID(), getUsername(), AESCrypt.encrypt(getPassword()), geabel());
+                            successful = Credentials.getInstance().addCredential(getUserID(), getUsername(), getPassword(), geabel());
+                                                 JOptionPane.showMessageDialog(new javax.swing.JFrame(),"Credential Added to database");
+                     //Credentials.getInstance().showCredentials();
                             //idk what return values to expect from this anyway
                             //we need a feature that checks if userID is less than or equal to the id of the last entry and
                             //makes the user id 1 greater than that of the last entry, or literally just always add 1 to the last entry
@@ -206,10 +208,11 @@ public class AddCredentialDialog extends javax.swing.JDialog {
              {
                  try
                  {
-                     successful = Credentials.getInstance().addCredential(getUserID(), getUsername(), AESCrypt.encrypt(getPassword()), geabel());
-                     //successful = Credentials.getInstance().addCredential(getUserID(), getUsername(), getPassword(), geabel());
+                     //successful = Credentials.getInstance().addCredential(getUserID(), getUsername(), AESCrypt.encrypt(getPassword()), geabel());
+                    successful = Credentials.getInstance().addCredential(getUserID(), getUsername(), getPassword(), geabel());
                     // System.out.println("Count of listeners: " + ((JButton) e.getSource()).getActionListeners().length);
                      JOptionPane.showMessageDialog(new javax.swing.JFrame(),"Credential Added to database");
+                    // Credentials.getInstance().showCredentials();
                  }
                   catch(Exception ex)
                     {
