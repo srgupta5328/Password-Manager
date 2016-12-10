@@ -16,6 +16,7 @@ public class MainApp {
         final JButton btnRegister = new JButton("Register an account");
         final JFrame addCredFrame = new JFrame("Add a Credential"); 
         final JFrame viewCredFrame = new JFrame("View Credentials");
+        final JFrame updateCredFrame = new JFrame("Update Credentials");
         final JButton btnAdd = new JButton("Add"); 
         final JButton btnGenerate = new JButton("Generate"); 
         final JButton btnViewCred = new JButton("View Credentials"); 
@@ -167,6 +168,17 @@ public class MainApp {
             public void actionPerformed(ActionEvent e) {
             //    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
+            });
+     
+     
+     btnUpdateCred.addActionListener(
+            new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    UpdateCredentialDialog addDlg = new UpdateCredentialDialog(updateCredFrame);
+                    addDlg.setVisible(true);
+                   
+                }
+          
             });
      
         
