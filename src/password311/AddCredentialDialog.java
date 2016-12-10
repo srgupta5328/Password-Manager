@@ -25,6 +25,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -58,6 +59,7 @@ public class AddCredentialDialog extends javax.swing.JDialog {
     private final String PASSWORD = "Hello";
     private static Connection connection;
     private int successful;
+    private String encryptedPassword;
     
     public AddCredentialDialog(Frame parent){
         super(parent,"Add Credential", true);
@@ -144,7 +146,7 @@ public class AddCredentialDialog extends javax.swing.JDialog {
                      }
                      else
                      {
-                         JOptionPane.showMessageDialog(new javax.swing.JFrame(),"Field Must Be Empty To Generate");
+                         JOptionPane.showMessageDialog(new javax.swing.JFrame(),"Field Must be Empty to Generate");
                      }
                  }
                   catch(Exception ex)
@@ -176,22 +178,27 @@ public class AddCredentialDialog extends javax.swing.JDialog {
                 new ActionListener(){ 
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                       // successful = 0;
-                        successful = Credentials.getInstance().addCredential(getUserID(), getUsername(), getPassword(), geabel());
-                        //idk what return values to expect from this anyway
-                        //we need a feature that checks if userID is less than or equal to the id of the last entry and
-                        //makes the user id 1 greater than that of the last entry, or literally just always add 1 to the last entry
-                        //just need to figure out how to always grab the last entry's id
-                        
-                       // int count = 0;
-                        //while (successful != 1)
-                        //{
-                        //   successful = Credentials.getInstance().addCredential(getUserID()+count, getUsername(), getPassword(), geabel());
-                        //    count++;
-                       // }
-                        //System.out.println("Count of listeners: " + ((JButton) e.getSource()).getActionListeners().length);
-                       // Credentials.getInstance().addCredential(2, USERNAME, PASSWORD, USERNAME); 
-                        //JOptionPane.showMessageDialog(new javax.swing.JFrame(),"You've clicked Add new credential button");
+                        try {
+                            // successful = 0;
+                            successful = Credentials.getInstance().addCredential(getUserID(), getUsername(), AESCrypt.encrypt(getPassword()), geabel());
+                            // successful = Credentials.getInstance().addCredential(getUserID(), getUsername(), getPassword(), geabel());
+                            //idk what return values to expect from this anyway
+                            //we need a feature that checks if userID is less than or equal to the id of the last entry and
+                            //makes the user id 1 greater than that of the last entry, or literally just always add 1 to the last entry
+                            //just need to figure out how to always grab the last entry's id
+                            
+                            // int count = 0;
+                            //while (successful != 1)
+                            //{
+                            //   successful = Credentials.getInstance().addCredential(getUserID()+count, getUsername(), getPassword(), geabel());
+                            //    count++;
+                            // }
+                            //System.out.println("Count of listeners: " + ((JButton) e.getSource()).getActionListeners().length);
+                            // Credentials.getInstance().addCredential(2, USERNAME, PASSWORD, USERNAME);
+                            //JOptionPane.showMessageDialog(new javax.swing.JFrame(),"You've clicked Add new credential button");
+                        } catch (Exception ex) {
+                            Logger.getLogger(AddCredentialDialog.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                 });
              }
@@ -199,7 +206,8 @@ public class AddCredentialDialog extends javax.swing.JDialog {
              {
                  try
                  {
-                     successful = Credentials.getInstance().addCredential(getUserID(), getUsername(), getPassword(), geabel());
+                     successful = Credentials.getInstance().addCredential(getUserID(), getUsername(), AESCrypt.encrypt(getPassword()), geabel());
+                     //successful = Credentials.getInstance().addCredential(getUserID(), getUsername(), getPassword(), geabel());
                     // System.out.println("Count of listeners: " + ((JButton) e.getSource()).getActionListeners().length);
                      JOptionPane.showMessageDialog(new javax.swing.JFrame(),"Credential Added to database");
                  }
@@ -241,6 +249,15 @@ public class AddCredentialDialog extends javax.swing.JDialog {
     }
  
     public String getPassword() {
+//        try {
+//            //return new String(AESCrypt.encrypt(tfPassword.getPassword()));
+//            encryptedPassword = AESCrypt.encrypt(Arrays.toString(tfPassword.getPassword()));
+//            
+////return new String(tfPassword.getPassword());
+//        } catch (Exception ex) {
+//            Logger.getLogger(AddCredentialDialog.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return encryptedPassword;
         return new String(tfPassword.getPassword());
     }
  
