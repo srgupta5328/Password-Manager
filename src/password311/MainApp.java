@@ -11,7 +11,7 @@ import javax.swing.*;
 public class MainApp {
     public static void main(String[] args) {
         final JFrame frame = new JFrame("Password Management");
-        final JButton btnLogin = new JButton("Login");
+        final JButton btnLogin = new JButton("Click to login to your account");
         final JFrame regframe = new JFrame("Register an account"); 
         final JButton btnRegister = new JButton("Register an account");
         final JFrame addCredFrame = new JFrame("Add a Credential"); 
@@ -53,14 +53,6 @@ public class MainApp {
                             } catch (SQLException ex) {
                                 Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                          btnLogin.setText("Hi " + loginDlg.getUsername() + "!");
-                            btnRegister.setVisible(false);
-                         btnAdd.setVisible(true);
-                         btnViewCred.setVisible(true);
-                         btnSearchCred.setVisible(true);
-                         btnUpdateCred.setVisible(true);
-                        searchField.setVisible(true); 
-                         btnLogOut.setVisible(true);
                         }
                     }
                 });
@@ -199,6 +191,17 @@ public class MainApp {
           
             });
      
+        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        try {
+                            Credentials.getInstance().encryptAllCredentials();
+                            System.exit(0);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                });
         
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 200);
