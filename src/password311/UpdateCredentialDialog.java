@@ -55,6 +55,7 @@ public class UpdateCredentialDialog extends javax.swing.JDialog {
     private JButton btnCancel;
     private JButton btnUpdate; 
     private JButton btnGenerate;
+    private JButton btnDelete;
     private boolean succeeded;
     private final String DATABASE_URL = "jdbc:derby://localhost:1527/Password311";
     private final String USERNAME = "Rohan";
@@ -303,11 +304,41 @@ public class UpdateCredentialDialog extends javax.swing.JDialog {
         }
    }});   
         
+        btnDelete = new JButton("Delete");
+        btnDelete.addActionListener(
+            new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e){
+                if (!tfUserID.getText().equals(""))
+                {    
+                 // CredentialListView credView = null;
+                 // credView = new CredentialListView(viewCredFrame);
+                    try {
+                        Credentials.getInstance().deleteCredential(getUserIDforUpdate());
+                        JOptionPane.showMessageDialog(new javax.swing.JFrame(),"You Deleted Credential: "+getUserIDforUpdate());
+                        Credentials.getInstance().showCredentials();
+                    } catch (SQLException ex) {
+                       
+                    }
+                 // credView.setVisible(true);
+                   
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(new javax.swing.JFrame(),"You must enter the proper ID to update a Credential.");                    
+                }
+                
+            }
+                
+          
+            });
+        
          JPanel addCredentialScreen = new JPanel();
         
         addCredentialScreen.add(btnCancel);
         addCredentialScreen.add(btnUpdate);
         addCredentialScreen.add(btnGenerate); 
+        addCredentialScreen.add(btnDelete);
  
         getContentPane().add(panel, BorderLayout.CENTER);
         getContentPane().add(addCredentialScreen, BorderLayout.PAGE_END);
