@@ -422,6 +422,49 @@ DriverManager.registerDriver(new org.apache.derby.jdbc.ClientDriver());
         
     }   
     
+    
+    public void deleteCredential(int ID)
+    {
+        try {
+            DriverManager.registerDriver(new org.apache.derby.jdbc.ClientDriver());
+            connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD); 
+            PreparedStatement deleteCredential = connection.prepareStatement("DELETE FROM CREDENTIAL WHERE ID = ?");
+            deleteCredential.setInt(1, ID);
+           // insertCredential.setString(2, username); 
+           // insertCredential.setString(3, password); 
+           // insertCredential.setString(4, label); 
+            deleteCredential.execute();
+            
+        usersDone = ID+1; //this where we start rolling back the IDs to avoid a crash on add
+        numberOfUsers = getNumberUsers();
+        
+        while(usersDone <= numberOfUsers+1) //1 more than the number of users because we just deleted a user
+        {
+            DriverManager.registerDriver(new org.apache.derby.jdbc.ClientDriver());
+            connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
+            pst = connection.prepareStatement("Update CREDENTIAL SET ID = ? WHERE ID = ?");
+            pst.setInt(1, usersDone-1);
+            pst.setInt(2, usersDone);
+            pst.executeUpdate();
+            pst.close();
+            
+            usersDone++;
+        }
+//            insertCredential = getConnection().prepareStatement("INSERT INTO CREDENTIAL (PASSWORD) values (?)");
+//            insertCredential.setString(1, password);  
+//            updateValue = insertCredential.executeUpdate();
+//            
+//            insertCredential = getConnection().prepareStatement("INSERT INTO CREDENTIAL (LABEL) values (?)");
+//            insertCredential.setString(1, label);  
+//            updateValue = insertCredential.executeUpdate();
+            deleteCredential.close();
+            connection.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Credentials.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+    }
+    
     private Connection getConnection()
     {
         return CredentialList.getConnection();
